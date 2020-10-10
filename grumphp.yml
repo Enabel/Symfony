@@ -1,0 +1,17 @@
+grumphp:
+    tasks:
+        composer:
+            file: ./composer.json
+            no_check_all: true
+        securitychecker: ~
+        make:
+            make_file: ~
+            task: grump
+        phpversion:
+            project: '7.2'
+        twigcs:
+            path: './templates/'
+            severity: 'warning'
+            ruleset: 'Allocine\Twigcs\Ruleset\Official'
+        yamllint:
+            parse_custom_tags: true
