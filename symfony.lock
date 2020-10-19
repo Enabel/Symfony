@@ -126,11 +126,26 @@
     "felixfbecker/language-server-protocol": {
         "version": "v1.4.0"
     },
+    "firebase/php-jwt": {
+        "version": "v5.2.0"
+    },
     "friendsoftwig/twigcs": {
         "version": "v3.2.2"
     },
     "gitonomy/gitlib": {
         "version": "v1.2.2"
+    },
+    "knpuniversity/oauth2-client-bundle": {
+        "version": "1.20",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.20",
+            "ref": "80acc9223a205cbf5d9828fd616c82a374d281dd"
+        },
+        "files": [
+            "config/packages/knpu_oauth2_client.yaml"
+        ]
     },
     "monolog/monolog": {
         "version": "2.1.1"
@@ -615,6 +630,9 @@
     },
     "symfony/yaml": {
         "version": "v5.1.7"
+    },
+    "thenetworg/oauth2-azure": {
+        "version": "v2.0.0"
     },
     "twig/extra-bundle": {
         "version": "v3.0.5"
