@@ -102,7 +102,7 @@ jobs:
                           username: 'Github Actions',
                           attachments: [{
                             color: '${{ env.WORKFLOW_CONCLUSION }}' === 'success' ? 'good' : '${{ env.WORKFLOW_CONCLUSION }}' === 'failure' ? 'danger' : 'warning',
-                            title: 'Password - Tests',
+                            title: 'Symfony - Tests',
                             text: `Commit: ${process.env.AS_MESSAGE} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}\nBy ${process.env.AS_AUTHOR} ${{ env.WORKFLOW_CONCLUSION }}`,
                           }]
                         }
