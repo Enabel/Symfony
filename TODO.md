@@ -2,8 +2,8 @@
 ## Authentification
 - User entity ✔
 - Guard Authentication ✔
-- Azure OAuth2
-- Microsoft Graph
+- Azure OAuth2 ✔
+- Microsoft Graph ✔
 
 ## SASS
 - Bootstrap

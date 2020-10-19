@@ -4,7 +4,7 @@
 
 # Setup ————————————————————————————————————————————————————————————————————————
 SHELL         = bash
-PROJECT       = symfonytemplate
+PROJECT       = symfony
 SYMFONY_BIN   = ./symfony
 EXEC_PHP      = $(SYMFONY_BIN) php
 REDIS         = $(DOCKER_EXEC) redis redis-cli

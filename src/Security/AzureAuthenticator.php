@@ -64,20 +64,6 @@ class AzureAuthenticator extends SocialAuthenticator
     public function getCredentials(Request $request)
     {
         return $this->fetchAccessToken($this->getClient());
-//        $graph = new Graph();
-//        $graph->setBaseUrl('https://graph.microsoft.com/');
-//        $graph->setApiVersion('beta');
-//        $graph->setAccessToken($token);
-//        dd($token);
-//        $profile = $graph
-//            ->createRequest(
-//                'GET',
-//                '/me'
-//            )
-//            ->setReturnType(\Microsoft\Graph\Model\User::class)
-//            ->execute()
-//        ;
-//        dd($profile);
     }
 
     /**
