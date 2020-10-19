@@ -43,6 +43,6 @@ class SecurityController extends AbstractController
     {
         /** @var AzureClient $client */
         $client = $clientRegistry->getClient('azure');
-        return $client->redirect(['openid', 'user.read']);
+        return $client->redirect(['openid', 'profile', 'user.read']);
     }
 }
