@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
+use KnpU\OAuth2ClientBundle\Client\Provider\AzureClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,5 +34,15 @@ class SecurityController extends AbstractController
     public function logout()
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    /**
+     * @Route("/login/azure", name="azure_login")
+     */
+    public function loginAzure(ClientRegistry $clientRegistry)
+    {
+        /** @var AzureClient $client */
+        $client = $clientRegistry->getClient('azure');
+        return $client->redirect(['openid', 'user.read']);
     }
 }

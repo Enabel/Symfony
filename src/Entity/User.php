@@ -30,7 +30,7 @@ class User implements UserInterface
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $password;
 
@@ -43,6 +43,21 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $displayName;
+
+    /**
+     * @ORM\Column(type="string", length=2, nullable=true)
+     */
+    private $language;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $jobTitle;
+
+    /**
+     * @ORM\Column(type="string", length=2, nullable=true)
+     */
+    private $countryWorkplace;
 
     public function getId(): ?int
     {
@@ -93,9 +108,9 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
     public function setPassword(string $password): self
@@ -142,6 +157,62 @@ class User implements UserInterface
     public function setDisplayName(?string $displayName): self
     {
         $this->displayName = $displayName;
+
+        return $this;
+    }
+
+    public function getLanguage(): ?string
+    {
+        return $this->language;
+    }
+
+    public function setLanguage(?string $language): self
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    public function getJobTitle(): ?string
+    {
+        return $this->jobTitle;
+    }
+
+    public function setJobTitle(?string $jobTitle): self
+    {
+        $this->jobTitle = $jobTitle;
+
+        return $this;
+    }
+
+    public function getCountryWorkplace(): ?string
+    {
+        return $this->countryWorkplace;
+    }
+
+    public function setCountryWorkplace(?string $countryWorkplace): self
+    {
+        $this->countryWorkplace = $countryWorkplace;
+
+        return $this;
+    }
+
+    public function setExtraInfo(?array $extraInfo): self
+    {
+        if (!empty($extraInfo['preferredLanguage'])) {
+            $this->setLanguage(strtolower(substr($extraInfo['preferredLanguage'], 0, 2)));
+        }
+
+        if (!empty($extraInfo['preferredLanguage'])) {
+            preg_match('/\[([A-Z]{2})\]$/', $extraInfo['officeLocation'], $countryWorkplace);
+            if (!empty($countryWorkplace[1])) {
+                $this->setCountryWorkplace($countryWorkplace[1]);
+            }
+        }
+
+        if (!empty($extraInfo['jobTitle'])) {
+            $this->setJobTitle($extraInfo['jobTitle']);
+        }
 
         return $this;
     }

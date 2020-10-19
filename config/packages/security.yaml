@@ -19,12 +19,12 @@ security:
             lazy: true
             provider: app_user_provider
             guard:
+                entry_point: App\Security\AzureAuthenticator
                 authenticators:
                     - App\Security\AppAuthenticator
+                    - App\Security\AzureAuthenticator
             logout:
                 path: app_logout
-                # where to redirect after logout
-                # target: app_any_route
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 259200 # 3 days in seconds

@@ -8,6 +8,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use TheNetworg\OAuth2\Client\Provider\AzureResourceOwner;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -36,32 +37,46 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findOrCreateFromAzure(AzureResourceOwner $owner, array $extraInfo = [])
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+        $user = $this->createQueryBuilder('u')
+            ->where('u.azureId = :azureId')
+            ->orWhere('u.email = :email')
+            ->setParameters([
+                'azureId' => $owner->getId(),
+                'email' => $owner->getUpn()
+            ])
             ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+            ->getOneOrNullResult();
 
-    /*
-    public function findOneBySomeField($value): ?User
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
+        $em = $this->getEntityManager();
+
+        if ($user) {
+            /** @var User $user */
+            if (!$user->getAzureId()) {
+                $user->setAzureId($owner->getId());
+            }
+            if (!empty($extraInfo)) {
+                $user->setExtraInfo($extraInfo);
+            }
+            $em->persist($user);
+            $em->flush();
+
+            return $user;
+        }
+
+        $user = (new User())
+            ->setAzureId($owner->getId())
+            ->setEmail($owner->getUpn())
+            ->setDisplayName($owner->getFirstName() . ' ' . $owner->getLastName())
+            ->setRoles(["ROLE_USER"])
         ;
+        if (!empty($extraInfo)) {
+            $user->setExtraInfo($extraInfo);
+        }
+        $em->persist($user);
+        $em->flush();
+
+        return $user;
     }
-    */
 }
