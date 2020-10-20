@@ -84,6 +84,27 @@ jobs:
 #            - name: Run functionnal and unit tests
 #              run: make test
 
+    ## —— Assets 💄 ——————————————————————————————————————————————————————————
+    yarn:
+        name: Yarn
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+            - name: Cache node_modules
+              uses: actions/cache@v1
+              id: yarn-cache-node-modules
+              with:
+                  path: node_modules
+                  key: ${{ runner.os }}-yarn-cache-node-modules-${{ hashFiles('**/yarn.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-yarn-cache-node-modules-
+            - name: Yarn install
+              if: steps.yarn-cache-node-modules.outputs.cache-hit != 'true'
+              run: yarn install
+            - name: Yarn build
+              run: yarn run encore production
+
     ## —— Notification 🔔 ————————————————————————————————————————————————————
     slack:
         name: Slack

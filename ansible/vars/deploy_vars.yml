@@ -1,0 +1,28 @@
+---
+# Database vars
+database_host: '{{ vault_database_host }}'
+database_user: '{{ vault_database_user }}'
+database_password: '{{ vault_database_password }}'
+database_name: 'damien'
+
+# GIT vars
+deploy_key_public: '{{ vault_deploy_key_public }}'
+deploy_key_private: '{{ vault_deploy_key_private }}'
+github_oauth_token: '{{ vault_github_oauth_token }}'
+
+# Slack vars
+slack_token: "{{ vault_slack_token }}"
+slack_domain: "{{ vault_slack_domain }}"
+slack_headline: "Ansistrano"
+slack_icon_url: "https://cdn4.iconfinder.com/data/icons/boy-hair-and-face/100/face6-512.png"
+slack_channel: "#dev"
+
+# Composer
+composer_path: "/usr/local/bin/composer"
+
+# Azure OAuth2
+azure_client_id: "{{ vault_azure_client_id }}"
+azure_client_secret: "{{ vault_azure_client_secret }}"
+
+# php-translation/loco-adapter ###
+loco_project_api_key: "{{ vault_loco_project_api_key }}"

@@ -1,0 +1,184 @@
+---
+- name: Send notification message via Slack all options
+  slack:
+    token: "{{ slack_token }}"
+    domain: "{{ slack_domain }}"
+    msg: 'Server: {{ ansible_hostname }} | Set up infrastructure-related parameters'
+    username: "{{ slack_headline }}"
+    icon_url: "{{ slack_icon_url }}"
+    channel: "{{ slack_channel }}"
+    parse: 'none'
+  delegate_to: localhost
+  when: slack_notification == true
+
+- name: Set up infrastructure-related parameters
+  template:
+    src: '{{ playbook_dir }}/templates/.env.j2'
+    dest: '{{ ansistrano_release_path.stdout }}/.env.{{ application_env }}'
+
+- name: Send notification message via Slack all options
+  slack:
+    token: "{{ slack_token }}"
+    domain: "{{ slack_domain }}"
+    msg: 'Server: {{ ansible_hostname }} | Install composer dependencies'
+    username: "{{ slack_headline }}"
+    icon_url: "{{ slack_icon_url }}"
+    channel: "{{ slack_channel }}"
+    parse: 'none'
+  delegate_to: localhost
+  when: slack_notification == true
+
+- name: 'Install Composer dependencies'
+  composer:
+    command: install
+    arguments: --classmap-authoritative
+    optimize_autoloader: yes
+    working_dir: '{{ ansistrano_release_path.stdout }}'
+    no_dev: false
+    executable: '{{ php_path }}'
+
+- name: Compile .env files for staging/production use
+  command: "{{ php_path }} {{ composer_path }} dump-env {{ application_env }}"
+  args:
+    chdir: '{{ ansistrano_release_path.stdout }}'
+  when: application_env != 'dev'
+
+- name: Send notification message via Slack all options
+  slack:
+    token: "{{ slack_token }}"
+    domain: "{{ slack_domain }}"
+    msg: 'Server: {{ ansible_hostname}} | Clear cache'
+    username: "{{ slack_headline }}"
+    icon_url: "{{ slack_icon_url }}"
+    channel: "{{ slack_channel }}"
+    parse: 'none'
+  delegate_to: localhost
+  when: slack_notification == true
+
+- name: Clear the cache
+  command: '{{ release_console_path }} cache:clear --no-warmup --env={{ application_env }}'
+
+- name: Warm up the cache
+  command: '{{ release_console_path }} cache:warmup --env={{ application_env }}'
+
+- name: Send notification message via Slack all options
+  slack:
+    token: "{{ slack_token }}"
+    domain: "{{ slack_domain }}"
+    msg: 'Server: {{ ansible_hostname }} | Check database & run migrations if needed'
+    username: "{{ slack_headline }}"
+    icon_url: "{{ slack_icon_url }}"
+    channel: "{{ slack_channel }}"
+    parse: 'none'
+  delegate_to: localhost
+  when: slack_notification == true
+
+- name: Create DB if not exists
+  command: '{{ release_console_path }} doctrine:database:create --if-not-exists --env={{ application_env }}'
+  register: create_db_output
+  changed_when: not create_db_output.stdout is search('already exists. Skipped')
+
+- name: Run migrations
+  command: '{{ release_console_path }} doctrine:migrations:migrate --no-interaction --env={{ application_env }}'
+  register: run_migrations_output
+  changed_when: not run_migrations_output.stdout is search('No migrations to execute')
+
+- name: Install bundle assets
+  command: '{{ release_console_path }} assets:install --symlink --env={{ application_env }}'
+
+- name: Send notification message via Slack all options
+  slack:
+    token: "{{ slack_token }}"
+    domain: "{{ slack_domain }}"
+    msg: 'Server: {{ ansible_hostname}} | Build Webpack Encore assets'
+    username: "{{ slack_headline }}"
+    icon_url: "{{ slack_icon_url }}"
+    channel: "{{ slack_channel }}"
+    parse: 'none'
+  delegate_to: localhost
+  when: slack_notification == true
+
+- name: Install Node dependencies
+  command: '{{ yarn_path }} install'
+  args:
+    chdir: '{{ ansistrano_release_path.stdout }}'
+
+- name: Install Webpack Encore assets
+  command: '{{ yarn_path }} encore {{ application_env }}'
+  args:
+    chdir: '{{ ansistrano_release_path.stdout }}'
+
+- name: Send notification message via Slack all options
+  slack:
+    token: "{{ slack_token }}"
+    domain: "{{ slack_domain }}"
+    msg: 'Server: {{ ansible_hostname}} | Check RO permissions'
+    username: "{{ slack_headline }}"
+    icon_url: "{{ slack_icon_url }}"
+    channel: "{{ slack_channel }}"
+    parse: 'none'
+  delegate_to: localhost
+  when: slack_notification == true
+
+- name: Setup owner/permissions
+  file:
+    path: "{{ release_path }}"
+    owner: "apache"
+    group: "apache"
+    mode: "u=rx,g=rx,o=r"
+    recurse: yes
+
+- name: Setup directory permissions for var/logs
+  become: true
+  file:
+    state: directory
+    path: "{{ item }}"
+    owner: "apache"
+    group: "apache"
+    recurse: yes
+    mode: "u=rxw,g=rxw,o=rw"
+  with_items:
+    - '{{ release_var_path }}'
+    - '{{ release_log_path }}'
+
+- name: Send notification message via Slack all options
+  slack:
+    token: "{{ slack_token }}"
+    domain: "{{ slack_domain }}"
+    msg: 'Server: {{ ansible_hostname}} | Check SELinux & context'
+    username: "{{ slack_headline }}"
+    icon_url: "{{ slack_icon_url }}"
+    channel: "{{ slack_channel }}"
+    parse: 'none'
+  delegate_to: localhost
+  when: slack_notification == true and ansible_distribution == 'CentOS'
+
+- name: getting selinux status
+  command: getenforce
+  register: selinux
+  when: ansible_distribution == 'CentOS'
+
+- name: Configure SELinux RO
+  action: "command semanage fcontext -a -t httpd_sys_content_t '{{ release_path }}/(/.*)?'"
+  when: "ansible_distribution == 'CentOS' and not selinux.stdout is search('Disabled')"
+
+- name: Exec restorecon RO
+  action: "command restorecon -Rv {{ release_path }}"
+  when: "ansible_distribution == 'CentOS' and not selinux.stdout is search('Disabled')"
+
+- name: Configure SELinux RW
+  action: "command semanage fcontext -a -t httpd_sys_rw_content_t '{{ item }}(/.*)?'"
+  with_items:
+    - '{{ release_var_path }}'
+  when: "ansible_distribution == 'CentOS' and not selinux.stdout is search('Disabled')"
+
+- name: Configure SELinux LOG
+  action: "command semanage fcontext -a -t httpd_log_t '{{ release_log_path }}(/.*)?'"
+  when: "ansible_distribution == 'CentOS' and not selinux.stdout is search('Disabled')"
+
+- name: Exec restorecon
+  action: "command restorecon -Rv {{ item }}"
+  with_items:
+    - "{{ release_var_path }}"
+    - "{{ release_log_path }}"
+  when: "ansible_distribution == 'CentOS' and not selinux.stdout is search('Disabled')"

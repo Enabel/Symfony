@@ -1,0 +1,25 @@
+---
+project_deploy_dir: '/var/www/html'
+host_server_name: 'damien01-test.up.btcctb.net'
+proxy_domain_name: 'damien.enabel.be'
+application_url: 'http://{{ host_server_name }}'
+application_public_url: 'https://{{ proxy_domain_name }}'
+application_env: 'prod'
+host_server_vhost_file: '/etc/apache2/sites-enabled/000-default.conf'
+database_root: '{{ vault_database_root }}'
+database_root_password: '{{ vault_database_root_password }}'
+git_branch: 'master'
+symfony_secret: '{{ vault_symfony_secret }}'
+php_path: '/opt/rh/rh-php72/root/usr/bin/php'
+yarn_path: '/usr/local/lib/npm/bin/yarn'
+mailer_transport: 'smtp'
+mailer_host: 'smtp.office365.com'
+mailer_port: '587'
+mailer_user: "{{ vault_mailer_user }}"
+mailer_password: "{{ vault_mailer_password }}"
+mailer_encryption: 'tls'
+mailer_auth_mode: 'login'
+slack_notification: true
+# Reverse proxy configuration
+trusted_proxies: '127.0.0.1,REMOTE_ADDR'
+trusted_hosts: '^(localhost|{{ host_server_name }}|{{ proxy_domain_name }})$'

@@ -11,7 +11,8 @@ REDIS         = $(DOCKER_EXEC) redis redis-cli
 SYMFONY       = $(SYMFONY_BIN) console
 COMPOSER      = $(EXEC_PHP) composer.phar
 DOCKER        = docker-compose
-DOCKER_EXEC = docker-compose exec
+DOCKER_EXEC   = docker-compose exec
+YARN          = $(DOCKER_EXEC) yarn yarn
 .DEFAULT_GOAL = help
 #.PHONY       = # Not needed for now
 
@@ -48,9 +49,6 @@ warmup: ## Warmup the cache
 
 fix-perms: ## Fix permissions of all var files
 	chmod -R 777 var/*
-
-assets: purge ## Install the assets with symlinks in the public folder
-	$(SYMFONY) assets:install public/ --symlink --relative
 
 purge: ## Purge cache and logs
 	rm -rf var/cache/* var/logs/*
@@ -173,6 +171,22 @@ init-psalm: ./psalm.xml ## Init a new psalm config file for a given level, it mu
 
 cs-fix: ## Run php-cs-fixer and fix the code.
 	./vendor/bin/php-cs-fixer fix src/
+
+## —— Assets 💄 ——————————————————————————————————————————————————————————
+yarn.lock: package.json
+	$(YARN) upgrade
+
+node_modules: yarn.lock ## Install yarn packages
+	@$(YARN)
+
+assets: node_modules ## Run Webpack Encore to compile development assets
+	@$(YARN) dev
+
+build: node_modules ## Run Webpack Encore to compile production assets
+	@$(YARN) build
+
+watch: node_modules ## Recompile assets automatically when files change
+	@$(YARN) watch
 
 ## —— Deploy & Prod 🚀 —————————————————————————————————————————————————————————
 deploy-prod: ## Deploy on prod, no-downtime deployment with Ansistrano
