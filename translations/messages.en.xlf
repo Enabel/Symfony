@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="en">
+  <file id="messages.en">
+    <unit id="iJAhVXd" name="admin.menu.dashboard">
+      <segment>
+        <source>admin.menu.dashboard</source>
+        <target>Dashboard</target>
+      </segment>
+    </unit>
+    <unit id="Pwc_SeY" name="admin.menu.permissions">
+      <segment>
+        <source>admin.menu.permissions</source>
+        <target>Permissions</target>
+      </segment>
+    </unit>
+    <unit id="5jJy.lS" name="admin.menu.user">
+      <segment>
+        <source>admin.menu.user</source>
+        <target>Users</target>
+      </segment>
+    </unit>
+    <unit id="grieobC" name="admin.menu.group">
+      <segment>
+        <source>admin.menu.group</source>
+        <target>Groups</target>
+      </segment>
+    </unit>
+    <unit id="5IXvfWX" name="admin.menu.role">
+      <segment>
+        <source>admin.menu.role</source>
+        <target>Roles</target>
+      </segment>
+    </unit>
+    <unit id="Zi_YIVu" name="admin.menu.homepage">
+      <segment>
+        <source>admin.menu.homepage</source>
+        <target>Homepage</target>
+      </segment>
+    </unit>
+    <unit id="fvdbN2N" name="admin.entity.user.singular">
+      <segment>
+        <source>admin.entity.user.singular</source>
+        <target>user</target>
+      </segment>
+    </unit>
+    <unit id="lqVp2h5" name="admin.entity.user.plural">
+      <segment>
+        <source>admin.entity.user.plural</source>
+        <target>users</target>
+      </segment>
+    </unit>
+    <unit id="Kx0.IQV" name="admin.entity.user.email">
+      <segment>
+        <source>admin.entity.user.email</source>
+        <target>Email</target>
+      </segment>
+    </unit>
+    <unit id="DBnxfLW" name="admin.entity.user.employeeNumber">
+      <segment>
+        <source>admin.entity.user.employeeNumber</source>
+        <target>Employee number</target>
+      </segment>
+    </unit>
+    <unit id="hfBTTBN" name="admin.entity.user.displayName">
+      <segment>
+        <source>admin.entity.user.displayName</source>
+        <target>Display Name</target>
+      </segment>
+    </unit>
+    <unit id="Tpkwl2v" name="admin.entity.group.singular">
+      <segment>
+        <source>admin.entity.group.singular</source>
+        <target>Group</target>
+      </segment>
+    </unit>
+    <unit id="HrfsfKF" name="admin.entity.group.plural">
+      <segment>
+        <source>admin.entity.group.plural</source>
+        <target>Groups</target>
+      </segment>
+    </unit>
+    <unit id="6vPv9nq" name="admin.entity.group.id">
+      <segment>
+        <source>admin.entity.group.id</source>
+        <target>#</target>
+      </segment>
+    </unit>
+    <unit id="1HdXMKl" name="admin.entity.group.name">
+      <segment>
+        <source>admin.entity.group.name</source>
+        <target>Name</target>
+      </segment>
+    </unit>
+    <unit id="F96AtIC" name="admin.entity.role.singular">
+      <segment>
+        <source>admin.entity.role.singular</source>
+        <target>Role</target>
+      </segment>
+    </unit>
+    <unit id="ZsaR0Eb" name="admin.entity.role.plural">
+      <segment>
+        <source>admin.entity.role.plural</source>
+        <target>Roles</target>
+      </segment>
+    </unit>
+    <unit id="X45ahha" name="admin.entity.role.friendlyName">
+      <segment>
+        <source>admin.entity.role.friendlyName</source>
+        <target>Name</target>
+      </segment>
+    </unit>
+    <unit id="fhkpW5_" name="admin.entity.role.technicalName">
+      <segment>
+        <source>admin.entity.role.technicalName</source>
+        <target>Code</target>
+      </segment>
+    </unit>
+    <unit id="puAWUo_" name="admin.entity.role.id">
+      <segment>
+        <source>admin.entity.role.id</source>
+        <target>#</target>
+      </segment>
+    </unit>
+    <unit id="Hnqa8wA" name="admin.entity.group.roles">
+      <segment>
+        <source>admin.entity.group.roles</source>
+        <target>Roles</target>
+      </segment>
+    </unit>
+    <unit id="0pWUolB" name="admin.entity.user.language">
+      <segment>
+        <source>admin.entity.user.language</source>
+        <target>Language</target>
+      </segment>
+    </unit>
+    <unit id="q9PZC8o" name="admin.entity.user.roles">
+      <segment>
+        <source>admin.entity.user.roles</source>
+        <target>Roles</target>
+      </segment>
+    </unit>
+    <unit id="7jKZyKd" name="admin.entity.user.groups">
+      <segment>
+        <source>admin.entity.user.groups</source>
+        <target>Groups</target>
+      </segment>
+    </unit>
+    <unit id="f3U2Gqw" name="app.name">
+      <segment>
+        <source>app.name</source>
+        <target>SymfonyTemplate</target>
+      </segment>
+    </unit>
+    <unit id="fsrtHZB" name="app.description">
+      <segment>
+        <source>app.description</source>
+        <target>Symfony template</target>
+      </segment>
+    </unit>
+    <unit id="7WnZa6t" name="main.menu.logout.label">
+      <segment>
+        <source>main.menu.logout.label</source>
+        <target>Logout</target>
+      </segment>
+    </unit>
+    <unit id="BH8sxTq" name="main.menu.login.label">
+      <segment>
+        <source>main.menu.login.label</source>
+        <target>Login</target>
+      </segment>
+    </unit>
+    <unit id="sFzCVxo" name="main.menu.admin.label">
+      <segment>
+        <source>main.menu.admin.label</source>
+        <target>Admin</target>
+      </segment>
+    </unit>
+    <unit id="D6CKFDy" name="app.menu.main.home">
+      <segment>
+        <source>app.menu.main.home</source>
+        <target>Home</target>
+      </segment>
+    </unit>
+    <unit id="KcJt8ey" name="app.menu.main.secure">
+      <segment>
+        <source>app.menu.main.secure</source>
+        <target>Secure area</target>
+      </segment>
+    </unit>
+    <unit id="RosU9._" name="app.menu.main.admin">
+      <segment>
+        <source>app.menu.main.admin</source>
+        <target>Admin</target>
+      </segment>
+    </unit>
+    <unit id="Sm7VqIY" name="app.secure.title">
+      <segment>
+        <source>app.secure.title</source>
+        <target>Secure area</target>
+      </segment>
+    </unit>
+    <unit id="ulEtZGz" name="app.homepage.title">
+      <segment>
+        <source>app.homepage.title</source>
+        <target>Home</target>
+      </segment>
+    </unit>
+    <unit id="BTkw..U" name="app.welcome">
+      <segment>
+        <source>app.welcome</source>
+        <target>Welcome to %app.name%</target>
+      </segment>
+    </unit>
+    <unit id="FiqIuG9" name="app.login.title">
+      <segment>
+        <source>app.login.title</source>
+        <target>Sign in</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

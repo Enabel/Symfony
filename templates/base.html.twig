@@ -1,77 +1,44 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <<meta charset="UTF-8">
+        <meta name="description" content="{{ 'app.description'|trans }}">
+        <meta name="author" content="Enabel">
+        <meta name="apple-mobile-web-app-title" content="{{ 'app.name'|trans }}">
+        <meta name="application-name" content="{{ 'app.name'|trans }}">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-config" content="{{ asset('favicon/browserconfig.xml') }}">
+        <meta name="theme-color" content="#ffffff">
+        <title>{% block title %}{{ 'app.name'|trans }}{% endblock %}</title>
         {% block stylesheets %}
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-                  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-                  crossorigin="anonymous">
-            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
-            <style>
-                body {
-                    padding-top: 4.5rem;
-                }
-            </style>
+            <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon/apple-touch-icon.png') }}">
+            <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon/favicon-32x32.png') }}">
+            <link rel="icon" type="image/png" sizes="194x194" href="{{ asset('favicon/favicon-194x194.png') }}">
+            <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('favicon/android-chrome-192x192.png') }}">
+            <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon/favicon-16x16.png') }}">
+            <link rel="manifest" href="{{ asset('favicon/site.webmanifest') }}">
+            <link rel="mask-icon" href="{{ asset('favicon/safari-pinned-tab.svg') }}" color="#ffc107">
+            <link rel="shortcut icon" href="{{ asset('favicon/favicon.ico') }}">
+
+            {{ encore_entry_link_tags('global') }}
         {% endblock %}
     </head>
     <body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container">
-            <a href="{{ path('homepage') }}" class="navbar-brand">SymfonyTemplate</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a href="{{ path('homepage') }}" class="nav-link {% if (app.request.get('_route') == 'homepage') %}active{% endif %}">Home</a>
-                    </li>
-                    <li class="nav-item" data-turbolinks="false">
-                        <a href="{{ path('secure') }}" class="nav-link {% if (app.request.get('_route') == 'secure') %}active{% endif %}">Secure</a>
-                    </li>
-                    <li class="nav-item" data-turbolinks="false">
-                        <a href="{{ path('admin') }}" class="nav-link {% if (app.request.get('_route') == 'admin') %}active{% endif %}">Admin</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav justify-content-end">
-                    {% if is_granted('ROLE_USER') %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="true" aria-expanded="false">
-                            <i class="far fa-user-circle fa-lg rounded-circle align-self-center mr-2" style="width: 32px;"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <h5 class="dropdown-item-text mb-0">{{ app.user.displayName }}</h5>
-                            <p class="dropdown-item-text text-muted mb-0">{{ app.user.username }}</p>
-                            <div class="dropdown-divider"></div>
-                            <a href="{{ path('app_logout') }}" class="dropdown-item">Sign Out</a>
-                        </div>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a href="{{ path('app_login') }}" class="nav-link">Sign In</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <main role="main" class="container">
-        {% block body %}{% endblock %}
-    </main>
-        {% block javascripts %}
-            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-                    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-                    crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-                    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-                    crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-                    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-                    crossorigin="anonymous"></script>
+        {% block navbar %}
+            {% include "_partial/navbar.html.twig" %}
+        {% endblock %}
 
+        <main role="main" class="container">
+            {% block body %}{% endblock %}
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <span class="text-muted">&copy; {{ date('now')|date('Y') }} Enabel</span>
+            </div>
+        </footer>
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </body>
 </html>

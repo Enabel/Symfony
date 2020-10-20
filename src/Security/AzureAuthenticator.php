@@ -58,7 +58,7 @@ class AzureAuthenticator extends SocialAuthenticator
 
     public function supports(Request $request)
     {
-        return 'oauth_check' === $request->attributes->get('_route') && $request->get('service') === 'azure';
+        return 'oauth_check_azure' === $request->attributes->get('_route');
     }
 
     public function getCredentials(Request $request)
@@ -101,8 +101,8 @@ class AzureAuthenticator extends SocialAuthenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
     {
         $targetPath = $this->getTargetPath($request->getSession(), $providerKey);
-
-        return new RedirectResponse($targetPath ?: 'homepage');
+        $homepage = $this->router->generate('homepage');
+        return new RedirectResponse($targetPath ?: $homepage);
     }
 
     /**
