@@ -42,3 +42,12 @@ services:
       - 6379:6379
     labels:
       com.symfony.server.service-prefix: 'REDIS'
+
+  yarn:
+    image: node:12-alpine
+    volumes:
+      - .:/app
+    ports:
+      - 8888:8080
+    working_dir: /app
+    command: ["yarn", "docker" ]
