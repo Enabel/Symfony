@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'app.homepage.title'|trans }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1 class="display-4">Welcome to {{ 'app.name'|trans }}</h1>
+                <p class="lead">{{ 'app.description'|trans }}</p>
+                <hr class="my-4">
+                     <div class="row">
+                    <div class="col-md-12 text-center">
+                        {% if app.user %}
+                            <div class="mb-3">
+                                <p>You are logged in as {{ app.user.displayName }}</p>
+                                <table class="table table-responsive-lg table-striped">
+                                    <tr>
+                                        <td>ID</td>
+                                        <td>{{ app.user.id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Azure ID</td>
+                                        <td>{{ app.user.azureId|default('-') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Display name</td>
+                                        <td>{{ app.user.displayName }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td>{{ app.user.username }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Job title</td>
+                                        <td>{{ app.user.jobTitle|default('-') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Country workplace</td>
+                                        <td>{{ app.user.countryWorkplace|default('-') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Language</td>
+                                        <td>{{ app.user.language|default('-') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Roles</td>
+                                        <td>{{ app.user.roles|join(' | ')|default('-') }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

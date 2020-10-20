@@ -23,6 +23,9 @@
     "amphp/sync": {
         "version": "v1.4.0"
     },
+    "clue/stream-filter": {
+        "version": "v1.5.0"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99"
     },
@@ -129,6 +132,9 @@
     "firebase/php-jwt": {
         "version": "v5.2.0"
     },
+    "friendsofapi/localise.biz": {
+        "version": "1.0.1"
+    },
     "friendsoftwig/twigcs": {
         "version": "v3.2.2"
     },
@@ -156,6 +162,9 @@
     "nikic/php-parser": {
         "version": "v4.10.2"
     },
+    "nyholm/nsa": {
+        "version": "1.2.1"
+    },
     "ocramius/proxy-manager": {
         "version": "2.2.3"
     },
@@ -170,6 +179,66 @@
     },
     "php": {
         "version": "7.2"
+    },
+    "php-http/client-common": {
+        "version": "2.3.0"
+    },
+    "php-http/discovery": {
+        "version": "1.12.0"
+    },
+    "php-http/guzzle7-adapter": {
+        "version": "0.1.0"
+    },
+    "php-http/httplug": {
+        "version": "2.2.0"
+    },
+    "php-http/message": {
+        "version": "1.9.1"
+    },
+    "php-http/message-factory": {
+        "version": "v1.0.2"
+    },
+    "php-http/multipart-stream-builder": {
+        "version": "1.1.2"
+    },
+    "php-http/promise": {
+        "version": "1.1.0"
+    },
+    "php-translation/common": {
+        "version": "3.0.1"
+    },
+    "php-translation/extractor": {
+        "version": "2.0.2"
+    },
+    "php-translation/loco-adapter": {
+        "version": "0.8",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.8",
+            "ref": "c97545d1c229338606d881294eceeb4cdc993777"
+        },
+        "files": [
+            "config/packages/php_translation_loco_adapter.yaml"
+        ]
+    },
+    "php-translation/symfony-bundle": {
+        "version": "0.10",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.10",
+            "ref": "7626dc2639039d9db29789b560171f2f2a9d8468"
+        },
+        "files": [
+            "config/packages/dev/php_translation.yaml",
+            "config/packages/php_translation.yaml",
+            "config/routes/dev/php_translation.yaml",
+            "config/routes/php_translation.yaml"
+        ]
+    },
+    "php-translation/symfony-storage": {
+        "version": "2.2.0"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -215,6 +284,9 @@
     },
     "psr/event-dispatcher": {
         "version": "1.0.0"
+    },
+    "psr/http-factory": {
+        "version": "1.0.1"
     },
     "psr/link": {
         "version": "1.0.0"
@@ -635,6 +707,25 @@
             "config/packages/dev/web_profiler.yaml",
             "config/packages/test/web_profiler.yaml",
             "config/routes/dev/web_profiler.yaml"
+        ]
+    },
+    "symfony/webpack-encore-bundle": {
+        "version": "1.6",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.6",
+            "ref": "69e1d805ad95964088bd510c05995e87dc391564"
+        },
+        "files": [
+            "assets/app.js",
+            "assets/styles/app.css",
+            "config/packages/assets.yaml",
+            "config/packages/prod/webpack_encore.yaml",
+            "config/packages/test/webpack_encore.yaml",
+            "config/packages/webpack_encore.yaml",
+            "package.json",
+            "webpack.config.js"
         ]
     },
     "symfony/yaml": {

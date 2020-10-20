@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="en">
+  <file id="messages.en">
+    <unit id="f3U2Gqw" name="app.name">
+      <segment>
+        <source>app.name</source>
+        <target>app.name</target>
+      </segment>
+    </unit>
+    <unit id="D6CKFDy" name="app.menu.main.home">
+      <segment>
+        <source>app.menu.main.home</source>
+        <target>app.menu.main.home</target>
+      </segment>
+    </unit>
+    <unit id="KcJt8ey" name="app.menu.main.secure">
+      <segment>
+        <source>app.menu.main.secure</source>
+        <target>app.menu.main.secure</target>
+      </segment>
+    </unit>
+    <unit id="sFzCVxo" name="main.menu.admin.label">
+      <segment>
+        <source>main.menu.admin.label</source>
+        <target>main.menu.admin.label</target>
+      </segment>
+    </unit>
+    <unit id="7WnZa6t" name="main.menu.logout.label">
+      <segment>
+        <source>main.menu.logout.label</source>
+        <target>main.menu.logout.label</target>
+      </segment>
+    </unit>
+    <unit id="BH8sxTq" name="main.menu.login.label">
+      <segment>
+        <source>main.menu.login.label</source>
+        <target>main.menu.login.label</target>
+      </segment>
+    </unit>
+    <unit id="fsrtHZB" name="app.description">
+      <segment>
+        <source>app.description</source>
+        <target>app.description</target>
+      </segment>
+    </unit>
+    <unit id="FiqIuG9" name="app.login.title">
+      <segment>
+        <source>app.login.title</source>
+        <target>app.login.title</target>
+      </segment>
+    </unit>
+    <unit id="ulEtZGz" name="app.homepage.title">
+      <segment>
+        <source>app.homepage.title</source>
+        <target>app.homepage.title</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

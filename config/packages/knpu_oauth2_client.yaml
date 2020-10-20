@@ -6,6 +6,4 @@ knpu_oauth2_client:
             client_secret: '%env(AZURE_CLIENT_SECRET)%'
             api_version: 'v1.0'
             url_api: 'https://graph.microsoft.com/'
-            redirect_route: oauth_check
-            redirect_params:
-                service: azure
+            redirect_route: oauth_check_azure

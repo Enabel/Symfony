@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="{{ path('homepage') }}">
+            <img src="{{ asset('img/enabel-icon.png') }}" alt="{{ 'app.name'|trans }} - Enabel" class="img-thumbnail">
+            {{ 'app.name'|trans }}
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link {% if (app.request.get('_route') == 'homepage') %}active{% endif %}" href="{{ path('homepage') }}"><i class="fa fa-home"></i> {{ 'app.menu.main.home'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if (app.request.get('_route') == 'secure') %}active{% endif %}" href="{{ path('secure') }}"><i class="fa fa-lock"></i> {{ 'app.menu.main.secure'|trans }}</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {% if app.request.locale == 'fr' %}<i class="flag-icon flag-icon-fr"></i> FR{% elseif app.request.locale == 'nl' %}<i class="flag-icon flag-icon-nl"></i> NL{% else %}<i class="flag-icon flag-icon-gb"></i> EN{% endif %}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{ path(app.request.get('_route'), app.request.attributes.get('_route_params')|merge({ _locale: 'en'})) }}"><i class="flag-icon flag-icon-gb"></i> English</a>
+                        <a class="dropdown-item" href="{{ path(app.request.get('_route'), app.request.attributes.get('_route_params')|merge({ _locale: 'fr'})) }}"><i class="flag-icon flag-icon-fr"></i> Français</a>
+                        <a class="dropdown-item" href="{{ path(app.request.get('_route'), app.request.attributes.get('_route_params')|merge({ _locale: 'nl'})) }}"><i class="flag-icon flag-icon-nl"></i> Dutch</a>
+                    </div>
+                </li>
+                {% if app.user %}
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user-circle fa-lg rounded-circle align-self-center mr-2" style="width: 32px;"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <h5 class="dropdown-item-text mb-0">{{ app.user.displayName }}</h5>
+                            <p class="dropdown-item-text text-muted mb-0">{{ app.user.username }}</p>
+                            <div class="dropdown-divider"></div>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('secure') }}" class="dropdown-item"><i class="fa fa-cogs"></i> {{ 'main.menu.admin.label'|trans }}</a>
+                            {% endif %}
+                            <a href="{{ path('app_logout') }}" class="dropdown-item"><i class="fa fa-unlock"></i> {{ 'main.menu.logout.label'|trans }}</a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="nav-item"><a href="{{ path('azure_login') }}" class="nav-link"><i class="fa fa-lock"></i> {{ 'main.menu.login.label'|trans }}</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -13,9 +13,7 @@ class IndexController extends AbstractController
      */
     public function homepage()
     {
-        return $this->render('index/index.html.twig', [
-            'controller_name' => 'Homepage',
-        ]);
+        return $this->render('index/index.html.twig');
     }
 
     /**
@@ -24,19 +22,6 @@ class IndexController extends AbstractController
      */
     public function secure()
     {
-        return $this->render('index/index.html.twig', [
-            'controller_name' => 'Secure',
-        ]);
-    }
-
-    /**
-     * @Route("/admin", name="admin")
-     * @IsGranted("ROLE_ADMIN")
-     */
-    public function admin()
-    {
-        return $this->render('index/index.html.twig', [
-            'controller_name' => 'Admin',
-        ]);
+        return $this->render('index/secure.html.twig');
     }
 }
