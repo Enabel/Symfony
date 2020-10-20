@@ -1,0 +1,34 @@
+---
+- name: Send notification message via Slack all options
+  slack:
+    token: "{{ slack_token }}"
+    domain: "{{ slack_domain }}"
+    msg: 'Server: {{ ansible_hostname }} | Deploy a new version of [{{ ansistrano_git_repo }} | branch: {{ git_branch }}] :crossed_fingers: '
+    username: "{{ slack_headline }}"
+    icon_url: "{{ slack_icon_url }}"
+    channel: "{{ slack_channel }}"
+    parse: 'none'
+  delegate_to: localhost
+  when: slack_notification == true
+
+- name: Create a symbolic link for php executable
+  file:
+    src: "{{ php_path }}"
+    dest: /usr/bin/php
+    state: link
+
+- name: Send notification message via Slack all options
+  slack:
+    token: "{{ slack_token }}"
+    domain: "{{ slack_domain }}"
+    msg: 'Server: {{ ansible_hostname }} | Check nodejs/yarn version: {{ nodejs_version }} via "geerlingguy.nodejs"'
+    username: "{{ slack_headline }}"
+    icon_url: "{{ slack_icon_url }}"
+    channel: "{{ slack_channel }}"
+    parse: 'none'
+  delegate_to: localhost
+  when: slack_notification == true
+
+- name: 'Check nodejs/yarn version: {{ nodejs_version }} via "geerlingguy.nodejs"'
+  include_role:
+    name: geerlingguy.nodejs

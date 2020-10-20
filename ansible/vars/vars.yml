@@ -1,0 +1,6 @@
+---
+ansistrano_current_dir: current # Softlink name. You should rarely changed it.
+server_document_root: "{{ project_deploy_dir }}/{{ ansistrano_current_dir }}/"
+nodejs_version: "12.x"
+nodejs_npm_global_packages:
+    - name: yarn

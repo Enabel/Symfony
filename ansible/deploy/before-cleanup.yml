@@ -1,0 +1,28 @@
+---
+- name: Send notification message via Slack all options
+  slack:
+    token: "{{ slack_token }}"
+    domain: "{{ slack_domain }}"
+    msg: 'Server: {{ ansible_hostname }} | Check write permissions [{{ release_var_path }}]'
+    username: "{{ slack_headline }}"
+    icon_url: "{{ slack_icon_url }}"
+    channel: "{{ slack_channel }}"
+    parse: 'none'
+  delegate_to: localhost
+  when: slack_notification == true
+
+- name: Add write permissions
+  file:
+    state: directory
+    path: "{{ release_var_path }}"
+    owner: "apache"
+    group: "apache"
+    recurse: yes
+    mode: "u=rxw,g=rxw,o=rw"
+
+- name: Configure Apache so it is able to send email
+  seboolean:
+    name: "httpd_can_sendmail"
+    state: yes
+    persistent: yes
+  when: "ansible_distribution == 'CentOS' and not selinux.stdout is search('Disabled')"
