@@ -6,8 +6,8 @@
 - Microsoft Graph ✔
 
 ## SASS
-- Bootstrap
-- Theming/layout
+- Bootstrap ✔
+- Theming/layout ✔
 
 ## Admin
 - User
