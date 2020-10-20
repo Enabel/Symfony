@@ -25,24 +25,24 @@ OR
 ### Register a Azure application
 * Register a new application in the Microsoft Application Registration portal
   * Name: Name of your choice (to identify the app)
-  * Account: Accounts in this organization directory only (for intern usage)
-  * Redirect url: Leave empty
+  * Account type: Accounts in this organizational directory only (for intern usage)
+  * Redirect URI: Leave empty
   * **Copy/Save the application ID for later (AZURE_CLIENT_ID)**
-* Certificats & secrets
+* Certificates & secrets
   * Create new client secret
     * Description: Name of your choice (to identify the app)
-    * Expiration date: 1 year / 2 year / never (according to your security policy)
+    * Expires: 1 year / 2 year / never (according to your security policy)
     * **Copy/Save the secret value for later (AZURE_CLIENT_SECRET)**
-* Auhtorized API
-  * Add the authorisation for:
+* API permissions
+  * Add the permissions for:
     * User.read
     * profile
     * openid
-* Authentification
-  * Add a plateform > Web
-    * URL Redirect: {{ app_base_url }}/oauth/check/azure
-    * URL Logout: leave empty
-    * Choose Token ID
+* Authentication
+  * Add a platform > Web
+    * Redirect URIs: {{ app_base_url }}/oauth/check/azure
+    * Logout URL: leave empty
+    * Implicit grant: Choose ID Tokens
     
 ### Configure OAuth2 client
 - Copy the Client ID & Client Secret from above to the [.env](.env) file
