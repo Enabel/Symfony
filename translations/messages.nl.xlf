@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="nl">
+  <file id="messages.nl">
+    <unit id="6vPv9nq" name="admin.entity.group.id">
+      <segment>
+        <source>admin.entity.group.id</source>
+        <target>#</target>
+      </segment>
+    </unit>
+    <unit id="puAWUo_" name="admin.entity.role.id">
+      <segment>
+        <source>admin.entity.role.id</source>
+        <target>#</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

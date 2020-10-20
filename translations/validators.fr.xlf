@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="fr">
+  <file id="validators.fr">
+    <unit id="XVwEJtj" name="It looks this user has already an account">
+      <segment>
+        <source>It looks this user has already an account</source>
+        <target>Il semble que cet utilisateur ait déjà un compte</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>
