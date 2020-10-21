@@ -1,0 +1,37 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %}
+    {{ 'admin.menu.dashboard'|trans }}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-6">
+            <h3>{{ 'admin.dashboard.userByCountry.title'|trans }}</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>{{ 'admin.dashboard.userByCountry.label.country'|trans }}</th>
+                        <th>{{ 'admin.dashboard.userByCountry.label.users'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for country in usersByCountry %}
+                    <tr>
+                        <td>{{ country.country }}</td>
+                        <td>{{ country.users }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h3>{{ 'admin.dashboard.userByCountry.title.lastSignIn'|trans }}</h3>
+            <ul>
+                {% for user in latestLogsIn %}
+                <li>#{{ user.id }}: {{ user.displayName }} - {{ user.lastLoginAt|date()|default('-') }} </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

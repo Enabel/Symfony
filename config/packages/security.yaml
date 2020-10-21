@@ -35,3 +35,9 @@ security:
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/secure, roles: ROLE_USER }
+
+    role_hierarchy:
+        GOD: [ ROLE_SUPER_ADMIN ]
+        ROLE_USER: [ IS_AUTHENTICATED ]
+        ROLE_SUPER_ADMIN: [ ROLE_ADMIN ]
+        ROLE_ADMIN: [ ROLE_USER, ROLE_MANAGE_USER ]

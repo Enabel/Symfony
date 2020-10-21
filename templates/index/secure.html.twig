@@ -47,7 +47,20 @@
                                         <td>Roles</td>
                                         <td>{{ app.user.roles|join(' | ')|default('-') }}</td>
                                     </tr>
+                                    <tr>
+                                        <td>Last login</td>
+                                        <td>{{ app.user.lastLoginAt|date()|default('-') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Created at</td>
+                                        <td>{{ app.user.createdAt|date()|default('-') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Updated at</td>
+                                        <td>{{ app.user.updatedAt|date()|default('-') }}</td>
+                                    </tr>
                                 </table>
+
                             </div>
                         {% endif %}
                     </div>

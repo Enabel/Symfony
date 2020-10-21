@@ -217,5 +217,287 @@
         <target>Sign in</target>
       </segment>
     </unit>
+    <unit id="kxejo7C" name="admin.menu.dashboard.label">
+      <segment>
+        <source>admin.menu.dashboard.label</source>
+        <target>Dashboard</target>
+      </segment>
+    </unit>
+    <unit id="_h6AMek" name="admin.menu.user.label">
+      <segment>
+        <source>admin.menu.user.label</source>
+        <target>User</target>
+      </segment>
+    </unit>
+    <unit id="UlZrH5U" name="admin.menu.backToSite.label">
+      <segment>
+        <source>admin.menu.backToSite.label</source>
+        <target>Back to site</target>
+      </segment>
+    </unit>
+    <unit id="LHFyHSB" name="app.name.backend">
+      <segment>
+        <source>app.name.backend</source>
+        <target>SymfonyTemplate Backend</target>
+      </segment>
+    </unit>
+    <unit id="Zr6Sdys" name="admin.dashboard.userByCountry.title">
+      <segment>
+        <source>admin.dashboard.userByCountry.title</source>
+        <target>Users by country</target>
+      </segment>
+    </unit>
+    <unit id="WliS_Go" name="admin.dashboard.userByCountry.label.users">
+      <segment>
+        <source>admin.dashboard.userByCountry.label.users</source>
+        <target>Users</target>
+      </segment>
+    </unit>
+    <unit id="YdNIAlR" name="admin.dashboard.userByCountry.label.country">
+      <segment>
+        <source>admin.dashboard.userByCountry.label.country</source>
+        <target>Country</target>
+      </segment>
+    </unit>
+    <unit id="EPSEejx" name="admin.dashboard.userByCountry.title.lastSignIn">
+      <segment>
+        <source>admin.dashboard.userByCountry.title.lastSignIn</source>
+        <target>Latest logs in</target>
+      </segment>
+    </unit>
+    <unit id="QIu9FCE" name="admin.label.users">
+      <segment>
+        <source>admin.label.users</source>
+        <target>Users</target>
+      </segment>
+    </unit>
+    <unit id="LRBrRDz" name="admin.label.user">
+      <segment>
+        <source>admin.label.user</source>
+        <target>User</target>
+      </segment>
+    </unit>
+    <unit id="gMaSJnq" name="admin.user.label.id">
+      <segment>
+        <source>admin.user.label.id</source>
+        <target>Id</target>
+      </segment>
+    </unit>
+    <unit id="RgLbSak" name="admin.user.label.displayName">
+      <segment>
+        <source>admin.user.label.displayName</source>
+        <target>Display name</target>
+      </segment>
+    </unit>
+    <unit id="dQMlh08" name="admin.user.label.email">
+      <segment>
+        <source>admin.user.label.email</source>
+        <target>Email</target>
+      </segment>
+    </unit>
+    <unit id="cUNDRFj" name="admin.user.label.language">
+      <segment>
+        <source>admin.user.label.language</source>
+        <target>Language</target>
+      </segment>
+    </unit>
+    <unit id="KMF3RKn" name="admin.user.label.azureId">
+      <segment>
+        <source>admin.user.label.azureId</source>
+        <target>Azure Id</target>
+      </segment>
+    </unit>
+    <unit id="T.kE7Rv" name="admin.user.label.countryWorkplace">
+      <segment>
+        <source>admin.user.label.countryWorkplace</source>
+        <target>Country workplace</target>
+      </segment>
+    </unit>
+    <unit id="wI16GgU" name="admin.user.label.jobTitle">
+      <segment>
+        <source>admin.user.label.jobTitle</source>
+        <target>Job title</target>
+      </segment>
+    </unit>
+    <unit id="93FMPnL" name="authenticator.account.disabled">
+      <segment>
+        <source>authenticator.account.disabled</source>
+        <target>Your account has been disabled!</target>
+      </segment>
+    </unit>
+    <unit id="5juvo8N" name="authenticator.account.notFound">
+      <segment>
+        <source>authenticator.account.notFound</source>
+        <target>Your account could not be found.</target>
+      </segment>
+    </unit>
+    <unit id="fNEmxn9" name="admin.group.panel.association">
+      <segment>
+        <source>admin.group.panel.association</source>
+        <target>Association information</target>
+      </segment>
+    </unit>
+    <unit id="gIIWPzj" name="admin.group.panel.user">
+      <segment>
+        <source>admin.group.panel.user</source>
+        <target>Users information</target>
+      </segment>
+    </unit>
+    <unit id="Vusx_mx" name="admin.group.label.name">
+      <segment>
+        <source>admin.group.label.name</source>
+        <target>Name</target>
+      </segment>
+    </unit>
+    <unit id="Hxb_4y5" name="admin.dashboard.at">
+      <segment>
+        <source>admin.dashboard.at</source>
+        <target>at</target>
+      </segment>
+    </unit>
+    <unit id="kRPErSc" name="admin.user.label.isActive">
+      <segment>
+        <source>admin.user.label.isActive</source>
+        <target>Active</target>
+      </segment>
+    </unit>
+    <unit id="sHgIpSG" name="admin.label.groups">
+      <segment>
+        <source>admin.label.groups</source>
+        <target>groups</target>
+      </segment>
+    </unit>
+    <unit id="067Wjk0" name="admin.label.group">
+      <segment>
+        <source>admin.label.group</source>
+        <target>group</target>
+      </segment>
+    </unit>
+    <unit id="NP1VTQA" name="admin.group.label.id">
+      <segment>
+        <source>admin.group.label.id</source>
+        <target>Id</target>
+      </segment>
+    </unit>
+    <unit id="DHNoQeP" name="admin.user.panel.personal">
+      <segment>
+        <source>admin.user.panel.personal</source>
+        <target>Personal information</target>
+      </segment>
+    </unit>
+    <unit id="eFTzykr" name="admin.user.panel.work">
+      <segment>
+        <source>admin.user.panel.work</source>
+        <target>Work information</target>
+      </segment>
+    </unit>
+    <unit id="2dt1anc" name="admin.user.panel.account">
+      <segment>
+        <source>admin.user.panel.account</source>
+        <target>Account information</target>
+      </segment>
+    </unit>
+    <unit id="IyUbbuS" name="admin.user.label.groups">
+      <segment>
+        <source>admin.user.label.groups</source>
+        <target>Groups</target>
+      </segment>
+    </unit>
+    <unit id="DIQPEQV" name="admin.user.panel.azure">
+      <segment>
+        <source>admin.user.panel.azure</source>
+        <target>Azure information</target>
+      </segment>
+    </unit>
+    <unit id="LiQY785" name="admin.user.panel.log">
+      <segment>
+        <source>admin.user.panel.log</source>
+        <target>Log information</target>
+      </segment>
+    </unit>
+    <unit id="97ys7I1" name="admin.user.label.lastLoginAt">
+      <segment>
+        <source>admin.user.label.lastLoginAt</source>
+        <target>Last login at</target>
+      </segment>
+    </unit>
+    <unit id="OFp5GBV" name="admin.user.label.createdAt">
+      <segment>
+        <source>admin.user.label.createdAt</source>
+        <target>Created at</target>
+      </segment>
+    </unit>
+    <unit id="5P.tafU" name="admin.user.label.updatedAt">
+      <segment>
+        <source>admin.user.label.updatedAt</source>
+        <target>Updated at</target>
+      </segment>
+    </unit>
+    <unit id="mA6.jQi" name="admin.group.panel.general">
+      <segment>
+        <source>admin.group.panel.general</source>
+        <target>General information</target>
+      </segment>
+    </unit>
+    <unit id="u.RgSFH" name="admin.group.label.roles">
+      <segment>
+        <source>admin.group.label.roles</source>
+        <target>Roles</target>
+      </segment>
+    </unit>
+    <unit id="tOx7OpI" name="admin.group.label.users">
+      <segment>
+        <source>admin.group.label.users</source>
+        <target>Users</target>
+      </segment>
+    </unit>
+    <unit id="7OJtcyJ" name="admin.group.panel.log">
+      <segment>
+        <source>admin.group.panel.log</source>
+        <target>Log information</target>
+      </segment>
+    </unit>
+    <unit id="xwh_BjU" name="admin.group.label.createdAt">
+      <segment>
+        <source>admin.group.label.createdAt</source>
+        <target>Created at</target>
+      </segment>
+    </unit>
+    <unit id="lWbkxkA" name="admin.group.label.updatedAt">
+      <segment>
+        <source>admin.group.label.updatedAt</source>
+        <target>Updated at</target>
+      </segment>
+    </unit>
+    <unit id="zb9AH4S" name="IS_AUTHENTICATED">
+      <segment>
+        <source>IS_AUTHENTICATED</source>
+        <target>IS_AUTHENTICATED</target>
+      </segment>
+    </unit>
+    <unit id="718iPw6" name="ROLE_ADMIN">
+      <segment>
+        <source>ROLE_ADMIN</source>
+        <target>ROLE_ADMIN</target>
+      </segment>
+    </unit>
+    <unit id="rvO5ZXf" name="ROLE_USER">
+      <segment>
+        <source>ROLE_USER</source>
+        <target>ROLE_USER</target>
+      </segment>
+    </unit>
+    <unit id="b7uwiwk" name="ROLE_MANAGE_USER">
+      <segment>
+        <source>ROLE_MANAGE_USER</source>
+        <target>ROLE_MANAGE_USER</target>
+      </segment>
+    </unit>
+    <unit id="WRuKTcz" name="ROLE_SUPER_ADMIN">
+      <segment>
+        <source>ROLE_SUPER_ADMIN</source>
+        <target>ROLE_SUPER_ADMIN</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

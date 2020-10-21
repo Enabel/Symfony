@@ -10,9 +10,9 @@
 - Theming/layout ✔
 
 ## Admin
-- User
-- Role
-- Group
+- User ✔
+- Role ✔
+- Group ✔
 
 ## Redis
 - Doctrine

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="en">
+  <file id="security.en">
+    <unit id="0xSwaIv" name="Email could not be found.">
+      <segment>
+        <source>Email could not be found.</source>
+        <target>Email could not be found.</target>
+      </segment>
+    </unit>
+    <unit id="F0VM.Uz" name="Your account as been disabled!">
+      <segment>
+        <source>Your account as been disabled!</source>
+        <target>Your account as been disabled!</target>
+      </segment>
+    </unit>
+    <unit id="2Au0VII" name="Your account has been disabled!">
+      <segment>
+        <source>Your account has been disabled!</source>
+        <target>Your account has been disabled!</target>
+      </segment>
+    </unit>
+    <unit id="93FMPnL" name="authenticator.account.disabled">
+      <segment>
+        <source>authenticator.account.disabled</source>
+        <target>authenticator.account.disabled</target>
+      </segment>
+    </unit>
+    <unit id="5juvo8N" name="authenticator.account.notFound">
+      <segment>
+        <source>authenticator.account.notFound</source>
+        <target>authenticator.account.notFound</target>
+      </segment>
+    </unit>
+    <unit id="F2e_S9d" name="Your account could not be found.">
+      <segment>
+        <source>Your account could not be found.</source>
+        <target>Your account could not be found.</target>
+      </segment>
+    </unit>
+    <unit id="eE_pdJB" name="Error fetching OAuth credentials: &quot;%error%&quot;.">
+      <segment>
+        <source>Error fetching OAuth credentials: "%error%".</source>
+        <target>Error fetching OAuth credentials: "invalid_grant
+AADSTS54005: OAuth2 Authorization code was already redeemed, please retry with a new valid code or use an existing refresh token.&#13;
+Trace ID: 9f1b3efc-58a5-4c95-8b27-b319ff571f00&#13;
+Correlation ID: b08d900a-39ec-43b2-b269-a0004d92e5ca&#13;
+Timestamp: 2020-10-21 14:00:30Z".</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>
