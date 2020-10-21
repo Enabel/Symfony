@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Gedmo\Timestampable\TimestampableListener;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -56,6 +57,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             if (!$user->getAzureId()) {
                 $user->setAzureId($owner->getId());
             }
+            if (!$user->getIsActive()) {
+                $user->setIsActive(true);
+            }
             if (!empty($extraInfo)) {
                 $user->setExtraInfo($extraInfo);
             }
@@ -69,7 +73,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->setAzureId($owner->getId())
             ->setEmail($owner->getUpn())
             ->setDisplayName($owner->getFirstName() . ' ' . $owner->getLastName())
-            ->setRoles(["ROLE_USER"])
+            ->setLastLoginAt(new \DateTime())
         ;
         if (!empty($extraInfo)) {
             $user->setExtraInfo($extraInfo);
@@ -78,5 +82,60 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $em->flush();
 
         return $user;
+    }
+
+    /**
+     * Update last login datetime
+     *
+     * @param User $user
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function setLastLogin(User $user)
+    {
+        // Disable timestampable to avoid wrong updated date
+        $this->disableTimestampable();
+        $user->setLastLoginAt(new \DateTime());
+        $this->_em->persist($user);
+        $this->_em->flush();
+    }
+
+    /**
+     * Temporary disable the event listeners of timestampable
+     */
+    private function disableTimestampable()
+    {
+        $evm = $this->_em->getEventManager();
+        foreach ($evm->getListeners() as $listeners) {
+            foreach ($listeners as $listener) {
+                if ($listener instanceof TimestampableListener) {
+                    $listenerInst = $listener;
+                    $evm->removeEventListener(
+                        ['prePersist','loadClassMetadata','onFlush'],
+                        $listenerInst
+                    );
+                }
+            }
+        }
+    }
+
+    public function statUserByCountry()
+    {
+        return $this->createQueryBuilder('u')
+            ->select('count(u.id) as users', 'u.countryWorkplace as country')
+            ->groupBy('u.countryWorkplace')
+            ->orderBy('users', 'DESC')
+            ->getQuery()
+            ->getArrayResult();
+    }
+
+    public function statLatestLogsIn(int $maxResults = 10)
+    {
+        return $this->createQueryBuilder('u')
+            ->orderBy('u.lastLoginAt', 'DESC')
+            ->setMaxResults($maxResults)
+            ->getQuery()
+            ->getResult();
     }
 }

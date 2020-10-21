@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -11,6 +14,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -22,11 +27,6 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
-
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
 
     /**
      * @var string The hashed password
@@ -58,6 +58,27 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=2, nullable=true)
      */
     private $countryWorkplace;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $lastLoginAt;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isActive;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Group::class, inversedBy="users")
+     */
+    private $groups;
+
+    public function __construct()
+    {
+        $this->setIsActive(true);
+        $this->groups = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -91,18 +112,18 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
+        $roles = new ArrayCollection();
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        // Default role/permissions
+        $roles->add('ROLE_USER');
 
-        return array_unique($roles);
-    }
+        foreach ($this->getGroups() as $group) {
+            foreach ($group->getRoles() as $role) {
+                $roles->add($role);
+            }
+        }
 
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
+        return array_unique($roles->toArray());
     }
 
     /**
@@ -215,5 +236,62 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    public function getLastLoginAt(): ?\DateTimeInterface
+    {
+        return $this->lastLoginAt;
+    }
+
+    public function setLastLoginAt(?\DateTimeInterface $lastLoginAt): self
+    {
+        $this->lastLoginAt = $lastLoginAt;
+
+        return $this;
+    }
+
+    public function getIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Group[]
+     */
+    public function getGroups(): Collection
+    {
+        return $this->groups;
+    }
+
+    public function addGroup(Group $group): self
+    {
+        if (!$this->groups->contains($group)) {
+            $this->groups[] = $group;
+            $group->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGroup(Group $group): self
+    {
+        if ($this->groups->contains($group)) {
+            $this->groups->removeElement($group);
+            $group->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->displayName;
     }
 }

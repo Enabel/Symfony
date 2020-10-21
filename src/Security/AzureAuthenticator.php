@@ -100,6 +100,10 @@ class AzureAuthenticator extends SocialAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
     {
+        $user = $token->getUser();
+        if ($user instanceof User) {
+            $this->userRepository->setLastLogin($user);
+        }
         $targetPath = $this->getTargetPath($request->getSession(), $providerKey);
         $homepage = $this->router->generate('homepage');
         return new RedirectResponse($targetPath ?: $homepage);

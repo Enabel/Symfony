@@ -38,7 +38,7 @@
                             <p class="dropdown-item-text text-muted mb-0">{{ app.user.username }}</p>
                             <div class="dropdown-divider"></div>
                             {% if is_granted('ROLE_ADMIN') %}
-                                <a href="{{ path('secure') }}" class="dropdown-item"><i class="fa fa-cogs"></i> {{ 'main.menu.admin.label'|trans }}</a>
+                                <a href="{{ path('admin') }}" class="dropdown-item"><i class="fa fa-cogs"></i> {{ 'main.menu.admin.label'|trans }}</a>
                             {% endif %}
                             <a href="{{ path('app_logout') }}" class="dropdown-item"><i class="fa fa-unlock"></i> {{ 'main.menu.logout.label'|trans }}</a>
                         </div>
