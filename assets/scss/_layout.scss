@@ -4,6 +4,7 @@ html {
   position: relative;
   min-height: 100%;
 }
+
 body {
   /* Margin bottom by footer height */
   margin-bottom: $footer_height;
@@ -17,8 +18,7 @@ body {
   position: absolute;
   bottom: 0;
   width: 100%;
-  /* Set the fixed height of the footer here */
-  height: $footer_height;
+  height: $footer_height; /* Set the fixed height of the footer here */
   line-height: $footer_height; /* Vertically center the text there */
   background-color: $light;
 
