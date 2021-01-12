@@ -36,7 +36,6 @@ ansible.cfg
 
 ###> squizlabs/php_codesniffer ###
 /.phpcs-cache
-/phpcs.xml
 ###< squizlabs/php_codesniffer ###
 
 ###> symfony/webpack-encore-bundle ###
