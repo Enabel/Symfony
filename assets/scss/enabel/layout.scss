@@ -1,12 +1,13 @@
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
   min-height: 100%;
+  position: relative;
 }
+
 body {
   /* Margin bottom by footer height */
-  margin-bottom: $footer_height;
+  margin-bottom: $footer-height;
 
   > .container {
     padding: 85px 15px 0;
@@ -14,16 +15,15 @@ body {
 }
 
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: $footer_height;
-  line-height: $footer_height; /* Vertically center the text there */
   background-color: $light;
+  bottom: 0;
+  height: $footer-height; /* Set the fixed height of the footer here */
+  line-height: $footer-height; /* Vertically center the text there */
+  position: absolute;
+  width: 100%;
 
   > .container {
-    padding-right: 15px;
     padding-left: 15px;
+    padding-right: 15px;
   }
 }

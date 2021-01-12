@@ -9,7 +9,7 @@ SYMFONY_BIN   = ./symfony
 EXEC_PHP      = $(SYMFONY_BIN) php
 REDIS         = $(DOCKER_EXEC) redis redis-cli
 SYMFONY       = $(SYMFONY_BIN) console
-COMPOSER      = $(EXEC_PHP) composer.phar
+COMPOSER      = $(SYMFONY_BIN) composer
 DOCKER        = docker-compose
 DOCKER_EXEC   = docker-compose exec
 YARN          = $(DOCKER_EXEC) yarn yarn
@@ -132,49 +132,52 @@ phpunit.xml:
 	cp phpunit.xml.dist phpunit.xml
 
 db-test: ## Build the test db, control the schema validity, check the migration status and load fixtures
-	./bin/console doctrine:cache:clear-metadata --env=test
-	./bin/console doctrine:database:create --if-not-exists --env=test
-	./bin/console doctrine:migrations:migrate --env=test -q
-	./bin/console hautelook:fixtures:load --env=test -n
+	$(SYMFONY) doctrine:cache:clear-metadata --env=test
+	$(SYMFONY) doctrine:database:create --if-not-exists --env=test
+	$(SYMFONY) doctrine:migrations:migrate --env=test -q
+	$(SYMFONY) hautelook:fixtures:load --env=test -n
 
 test: phpunit.xml db-test ## Launch main functional and unit tests
-	./bin/phpunit --stop-on-failure
+	$(EXEC_PHP) ./bin/phpunit --stop-on-failure
 
 test-external: phpunit.xml db-test ## Launch tests implying external resources (api, services...)
-	./bin/phpunit --group=external --stop-on-failure
+	$(EXEC_PHP) ./bin/phpunit --group=external --stop-on-failure
 
 test-all: phpunit.xml db-test ## Launch all tests
-	./bin/phpunit --stop-on-failure
+	$(EXEC_PHP) ./bin/phpunit --stop-on-failure
 
 ## —— Coding standards ✨ ——————————————————————————————————————————————————————
 cs: stan mess codesniffer psalm ## Launch check style and static analysis
-grump: stan mess codesniffer psalm ## Launch checkstyle, static analysis before commit with grumphp
+grump: stan mess codesniffer psalm csslint ## Launch checkstyle, static analysis before commit with grumphp
 
 codesniffer: ## Run php_codesniffer only
-	./vendor/bin/phpcs --standard=checkstyle.xml -n -p src/
+	$(EXEC_PHP) ./vendor/bin/phpcs --standard=phpcs.xml -n -p src/
 
 stan: ## Run PHPStan only
-	./vendor/bin/phpstan analyse --memory-limit 1G -c phpstan.neon src/
+	$(EXEC_PHP) ./vendor/bin/phpstan analyse --memory-limit 1G -c phpstan.neon src/
 
 mess: ## Run PHP Mess Detector only
-	./vendor/bin/phpmd --exclude Migrations src/ ansi ./codesize.xml
+	$(EXEC_PHP) ./vendor/bin/phpmd --exclude Migrations src/ ansi ./codesize.xml
 
 psalm: ./psalm.xml ## Run psalm only
-	./vendor/bin/psalm --show-info=false
+	$(EXEC_PHP) ./vendor/bin/psalm --show-info=false
 
 ./psalm.xml:
-	./vendor/bin/psalm --init src/ 8
+	$(EXEC_PHP) ./vendor/bin/psalm --init src/ 8
 
 init-psalm: ./psalm.xml ## Init a new psalm config file for a given level, it must be decremented to have stricter rules
 	rm ./psalm.xml
-	./vendor/bin/psalm --init src/ 8
+	$(EXEC_PHP) ./vendor/bin/psalm --init src/ 8
 
 cs-fix: ## Run php-cs-fixer and fix the code.
-	./vendor/bin/php-cs-fixer fix src/
+	$(EXEC_PHP) ./vendor/bin/php-cs-fixer fix src/
+
+csslint: ## Run stylelint (css/sass)
+	$(YARN) stylelint assets/
 
 ## —— Assets 💄 ——————————————————————————————————————————————————————————
 yarn.lock: package.json
-	$(YARN) upgrade
+	$(YARN) install
 
 node_modules: yarn.lock ## Install yarn packages
 	@$(YARN)

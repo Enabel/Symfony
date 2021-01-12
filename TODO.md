@@ -15,6 +15,6 @@
 - Group ✔
 
 ## Redis
-- Doctrine
-- Session
-- Framework
+- Doctrine ✔
+- Session ✔
+- Framework ✔

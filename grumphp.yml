@@ -1,4 +1,6 @@
 grumphp:
+    git_hook_variables:
+        EXEC_GRUMPHP_COMMAND: './symfony php'
     tasks:
         composer:
             file: ./composer.json
@@ -8,10 +10,21 @@ grumphp:
             make_file: ~
             task: grump
         phpversion:
-            project: '7.2'
+            project: '7.4'
         twigcs:
             path: './templates/'
             severity: 'warning'
             ruleset: 'Allocine\Twigcs\Ruleset\Official'
         yamllint:
             parse_custom_tags: true
+        eslint:
+            bin: node_modules/.bin/eslint
+            triggered_by: [ js, jsx, ts, tsx, vue ]
+            whitelist_patterns:
+                - /^assets\/js\/(.*)/
+                - /^webpack.config.js/
+            config: .eslintrc.json
+            debug: false
+            format: ~
+            max_warnings: ~
+            no_eslintrc: false

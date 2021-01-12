@@ -1,6 +1,5 @@
-@import "_variables";
-@import "~bootstrap/scss/bootstrap";
-@import "~font-awesome/scss/font-awesome";
-@import "~flag-icon-css/sass/flag-icon";
-
-@import "_layout";
+@import 'enabel/variables';
+@import '~bootstrap/scss/bootstrap';
+@import '~font-awesome/scss/font-awesome';
+@import '~flag-icon-css/sass/flag-icon';
+@import 'enabel/layout';
