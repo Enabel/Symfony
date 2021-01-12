@@ -1,2 +1,2 @@
-const $ = require('jquery');
-require('bootstrap');
+const $ = require("jquery");
+require("bootstrap");
