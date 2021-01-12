@@ -180,6 +180,9 @@
     "league/oauth2-client": {
         "version": "2.5.0"
     },
+    "mez/grumphp-tasks": {
+        "version": "1.3.0"
+    },
     "monolog/monolog": {
         "version": "2.1.1"
     },

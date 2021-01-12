@@ -148,7 +148,7 @@ test-all: phpunit.xml db-test ## Launch all tests
 
 ## —— Coding standards ✨ ——————————————————————————————————————————————————————
 cs: stan mess codesniffer psalm ## Launch check style and static analysis
-grump: stan mess codesniffer psalm ## Launch checkstyle, static analysis before commit with grumphp
+grump: stan mess codesniffer psalm csslint ## Launch checkstyle, static analysis before commit with grumphp
 
 codesniffer: ## Run php_codesniffer only
 	$(EXEC_PHP) ./vendor/bin/phpcs --standard=phpcs.xml -n -p src/
@@ -172,9 +172,12 @@ init-psalm: ./psalm.xml ## Init a new psalm config file for a given level, it mu
 cs-fix: ## Run php-cs-fixer and fix the code.
 	$(EXEC_PHP) ./vendor/bin/php-cs-fixer fix src/
 
+csslint: ## Run stylelint (css/sass)
+	$(YARN) stylelint assets/
+
 ## —— Assets 💄 ——————————————————————————————————————————————————————————
 yarn.lock: package.json
-	$(YARN) upgrade
+	$(YARN) install
 
 node_modules: yarn.lock ## Install yarn packages
 	@$(YARN)

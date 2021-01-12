@@ -1,5 +1,7 @@
 # Symfony
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/46368121c35c4c3c87a0c7509a38bdfd)](https://www.codacy.com/gh/Enabel/Symfony/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Enabel/Symfony&amp;utm_campaign=Badge_Grade)
+
 Template to make another Symfony application made by Enabel IT Team.
 
 ## Requirement

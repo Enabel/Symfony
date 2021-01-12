@@ -10,6 +10,7 @@ Encore
     .setOutputPath("public/build/")
     .setPublicPath("/build")
     .addEntry("app", "./assets/js/app.js")
+    .addEntry('polyfill', 'babel-polyfill')
     .addStyleEntry("global","./assets/scss/global.scss")
     .splitEntryChunks()
     .enableSingleRuntimeChunk()
@@ -40,6 +41,24 @@ Encore
 // uncomment if you use API Platform Admin (composer req api-admin)
 // .enableReactPreset()
 // .addEntry("admin", "./assets/js/admin.js")
+    .addLoader({
+        test: /\.js$/,
+        enforce: 'pre',
+        loader: 'prettier-loader',
+        exclude: /node_modules/,
+        options: {
+            parser: 'babel'
+        }
+    })
+    .addLoader({
+        test: /\.js$/,
+        enforce: 'pre',
+        loader: 'eslint-loader',
+        exclude: /node_modules/,
+        options: {
+            fix: false
+        }
+    })
 ;
 
 module.exports = Encore.getWebpackConfig();

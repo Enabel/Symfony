@@ -17,3 +17,14 @@ grumphp:
             ruleset: 'Allocine\Twigcs\Ruleset\Official'
         yamllint:
             parse_custom_tags: true
+        eslint:
+            bin: node_modules/.bin/eslint
+            triggered_by: [ js, jsx, ts, tsx, vue ]
+            whitelist_patterns:
+                - /^assets\/js\/(.*)/
+                - /^webpack.config.js/
+            config: .eslintrc.json
+            debug: false
+            format: ~
+            max_warnings: ~
+            no_eslintrc: false
