@@ -22,7 +22,7 @@
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
-        "docker": "npm install && encore dev --watch",
+        "docker": "yarn install && encore dev --watch",
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
