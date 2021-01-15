@@ -1,18 +1,18 @@
 version: '3'
 services:
   database:
-    image: mariadb:10.1
+    image: mariadb:10.1.45
     volumes:
       - .docker/data/db:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: toor
       MYSQL_DATABASE: template
-      MYSQL_USER: db_user
-      MYSQL_PASSWORD: db_password
+      MYSQL_USER: root
+      MYSQL_PASSWORD: toor
     ports:
       - 3306:3306
     labels:
-      com.symfony.server.service-prefix: 'DATABASE'
+      com.symfony.server.service-prefix: 'DB'
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
