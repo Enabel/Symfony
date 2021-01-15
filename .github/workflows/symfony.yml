@@ -15,7 +15,7 @@ jobs:
         runs-on: ubuntu-18.04
         services:
             mariadb:
-                image: mariadb:10.1
+                image: mariadb:10.1.45
                 env:
                     MYSQL_ROOT_PASSWORD: toor
                     MYSQL_DATABASE: db_test
@@ -23,8 +23,6 @@ jobs:
                     MYSQL_PASSWORD: symfony
                 ports:
                     - 3306:3306
-                labels:
-                    com.symfony.server.service-prefix: 'DATABASE'
         strategy:
             fail-fast: true
             matrix:
