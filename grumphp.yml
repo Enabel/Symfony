@@ -5,7 +5,6 @@ grumphp:
         composer:
             file: ./composer.json
             no_check_all: true
-        securitychecker: ~
         make:
             make_file: ~
             task: grump
