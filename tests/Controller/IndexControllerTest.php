@@ -10,7 +10,7 @@ class IndexControllerTest extends WebTestCase
     public function testHomepage()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/');
+        $client->request('GET', '/');
 
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h1', 'Welcome to SymfonyTemplate');
@@ -19,7 +19,7 @@ class IndexControllerTest extends WebTestCase
     public function testSecureNeedAuth()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/secure');
+        $client->request('GET', '/secure');
 
         $this->assertResponseRedirects('/login/azure');
     }
@@ -34,8 +34,7 @@ class IndexControllerTest extends WebTestCase
 
         // simulate $adminUsers[0] being logged in
         $client->loginUser($adminUsers[0]);
-
-        $crawler = $client->request('GET', '/secure');
+        $client->request('GET', '/secure');
 
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('td.data-role', 'ROLE_ADMIN');
