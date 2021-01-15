@@ -125,20 +125,24 @@ schema: ## Build the db, control the schema validity and check the migration sta
 	$(SYMFONY) doctrine:migrations:migrate -q
 
 load-fixtures: schema ## Build the db, control the schema validity, check the migration status and load fixtures
-	$(SYMFONY) hautelook:fixtures:load -n
+	$(SYMFONY) doctrine:fixtures:load -n
 
 ## —— Tests ✅ —————————————————————————————————————————————————————————————————
 phpunit.xml:
 	cp phpunit.xml.dist phpunit.xml
 
-db-test: ## Build the test db, control the schema validity, check the migration status and load fixtures
+schema-test: ## Build the test db, control the schema validity and check the migration status
 	$(SYMFONY) doctrine:cache:clear-metadata --env=test
 	$(SYMFONY) doctrine:database:create --if-not-exists --env=test
 	$(SYMFONY) doctrine:migrations:migrate --env=test -q
-	$(SYMFONY) hautelook:fixtures:load --env=test -n
+
+load-fixtures-test: ## load fixtures
+	$(SYMFONY) doctrine:fixtures:load --env=test -n
+
+db-test: schema-test load-fixtures-test ## Build the test db, control the schema validity, check the migration status and load fixtures
 
 test: phpunit.xml db-test ## Launch main functional and unit tests
-	$(EXEC_PHP) ./bin/phpunit --stop-on-failure
+	$(EXEC_PHP) ./bin/phpunit --stop-on-failure --coverage-text --coverage-clover=coverage.xml
 
 test-external: phpunit.xml db-test ## Launch tests implying external resources (api, services...)
 	$(EXEC_PHP) ./bin/phpunit --group=external --stop-on-failure

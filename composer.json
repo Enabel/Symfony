@@ -67,6 +67,7 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "escapestudios/symfony2-coding-standard": "^3.11",
         "friendsoftwig/twigcs": "^3.2",
         "phpmd/phpmd": "^2.9",
@@ -86,7 +87,8 @@
         "symfony/stopwatch": "^5.1",
         "symfony/var-dumper": "^5.1",
         "symfony/web-profiler-bundle": "^5.1",
-        "vimeo/psalm": "^3.16"
+        "vimeo/psalm": "^3.16",
+        "zenstruck/foundry": "^1.6"
     },
     "config": {
         "optimize-autoloader": true,

@@ -294,4 +294,11 @@ class User implements UserInterface
     {
         return $this->displayName;
     }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 }

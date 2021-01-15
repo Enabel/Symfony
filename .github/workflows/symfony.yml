@@ -15,10 +15,10 @@ jobs:
         runs-on: ubuntu-18.04
         services:
             mariadb:
-                image: mariadb:10.1
+                image: mariadb:10.1.45
                 env:
                     MYSQL_ROOT_PASSWORD: toor
-                    MYSQL_DATABASE: db_test
+                    MYSQL_DATABASE: template_test
                     MYSQL_USER: symfony
                     MYSQL_PASSWORD: symfony
                 ports:
@@ -66,31 +66,7 @@ jobs:
             - name: Install Composer dependencies
               run: make install
 
-            # —— Symfony 🎵 ——————————————————————————————————————————————————————————
-            - name: Check Symfony requirements
-              run: vendor/bin/requirements-checker
-
-            - name: Check the Symfony console
-              run: php bin/console -V
-
-            ## —— Coding standards ✨ ————————————————————————————————————————————————
-            - name: Coding standards checks (php_codesniffer + PHPMD+ PHPStan)
-              run: make cs
-
-            ## —— Tests ✅ ———————————————————————————————————————————————————————————
-#            - name: Load Doctrine fixtures
-#              run: make load-fixtures
-#
-#            - name: Run functionnal and unit tests
-#              run: make test
-
-    ## —— Assets 💄 ——————————————————————————————————————————————————————————
-    yarn:
-        name: Yarn
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v2
+            # —— Assets 💄 ——————————————————————————————————————————————————————————
             - name: Cache node_modules
               uses: actions/cache@v1
               id: yarn-cache-node-modules
@@ -104,6 +80,29 @@ jobs:
               run: yarn install
             - name: Yarn build
               run: yarn run encore production
+
+            # —— Symfony 🎵 ——————————————————————————————————————————————————————————
+            - name: Check Symfony requirements
+              run: vendor/bin/requirements-checker
+
+            - name: Check the Symfony console
+              run: php bin/console -V
+
+            ## —— Coding standards ✨ ————————————————————————————————————————————————
+            - name: Coding standards checks (php_codesniffer + PHPMD+ PHPStan)
+              run: make cs
+
+            ## —— Tests ✅ ———————————————————————————————————————————————————————————
+            - name: Create & fill database
+              run: make db-test
+
+            - name: Run functionnal and unit tests
+              run: make test
+
+            - name: Publish coverage report to Codecov
+              uses: codecov/codecov-action@v1
+              with:
+                  file: ./coverage.xml
 
     ## —— Notification 🔔 ————————————————————————————————————————————————————
     slack:

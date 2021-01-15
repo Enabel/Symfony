@@ -1,6 +1,6 @@
 {
-    "name": "Costruction",
-    "short_name": "Costruction",
+    "name": "SymfonyTemplate",
+    "short_name": "SymfonyTemplate",
     "icons": [
         {
             "src": "android-chrome-192x192.png",
@@ -10,6 +10,6 @@
     ],
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
-    "start_url": "https://costruction.enabel.be",
+    "start_url": "https://127.0.0.1:8000",
     "display": "standalone"
 }
