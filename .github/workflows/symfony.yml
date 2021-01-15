@@ -23,6 +23,8 @@ jobs:
                     MYSQL_PASSWORD: symfony
                 ports:
                     - 3306:3306
+                labels:
+                    com.symfony.server.service-prefix: 'DATABASE'
         strategy:
             fail-fast: true
             matrix:
