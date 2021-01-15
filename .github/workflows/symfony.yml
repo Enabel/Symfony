@@ -18,7 +18,7 @@ jobs:
                 image: mariadb:10.1.45
                 env:
                     MYSQL_ROOT_PASSWORD: toor
-                    MYSQL_DATABASE: db_test
+                    MYSQL_DATABASE: template_test
                     MYSQL_USER: symfony
                     MYSQL_PASSWORD: symfony
                 ports:
@@ -66,6 +66,23 @@ jobs:
             - name: Install Composer dependencies
               run: make install
 
+            # —— Assets 💄 ——————————————————————————————————————————————————————————
+            - name: Checkout
+              uses: actions/checkout@v2
+            - name: Cache node_modules
+              uses: actions/cache@v1
+              id: yarn-cache-node-modules
+              with:
+                  path: node_modules
+                  key: ${{ runner.os }}-yarn-cache-node-modules-${{ hashFiles('**/yarn.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-yarn-cache-node-modules-
+            - name: Yarn install
+              if: steps.yarn-cache-node-modules.outputs.cache-hit != 'true'
+              run: yarn install
+            - name: Yarn build
+              run: yarn run encore production
+
             # —— Symfony 🎵 ——————————————————————————————————————————————————————————
             - name: Check Symfony requirements
               run: vendor/bin/requirements-checker
@@ -88,27 +105,6 @@ jobs:
               uses: codecov/codecov-action@v1
               with:
                   file: ./coverage.xml
-
-    ## —— Assets 💄 ——————————————————————————————————————————————————————————
-    yarn:
-        name: Yarn
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v2
-            - name: Cache node_modules
-              uses: actions/cache@v1
-              id: yarn-cache-node-modules
-              with:
-                  path: node_modules
-                  key: ${{ runner.os }}-yarn-cache-node-modules-${{ hashFiles('**/yarn.lock') }}
-                  restore-keys: |
-                      ${{ runner.os }}-yarn-cache-node-modules-
-            - name: Yarn install
-              if: steps.yarn-cache-node-modules.outputs.cache-hit != 'true'
-              run: yarn install
-            - name: Yarn build
-              run: yarn run encore production
 
     ## —— Notification 🔔 ————————————————————————————————————————————————————
     slack:
