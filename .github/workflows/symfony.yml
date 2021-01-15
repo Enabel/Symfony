@@ -78,11 +78,16 @@ jobs:
               run: make cs
 
             ## —— Tests ✅ ———————————————————————————————————————————————————————————
-#            - name: Load Doctrine fixtures
-#              run: make load-fixtures
-#
-#            - name: Run functionnal and unit tests
-#              run: make test
+            - name: Create & fill database
+              run: make db-test
+
+            - name: Run functionnal and unit tests
+              run: make test
+
+            - name: Publish coverage report to Codecov
+              uses: codecov/codecov-action@v1
+              with:
+                  file: ./coverage.xml
 
     ## —— Assets 💄 ——————————————————————————————————————————————————————————
     yarn:

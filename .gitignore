@@ -32,6 +32,7 @@ ansible.cfg
 .phpunit
 .phpunit.result.cache
 /phpunit.xml
+coverage.xml
 ###< symfony/phpunit-bridge ###
 
 ###> squizlabs/php_codesniffer ###

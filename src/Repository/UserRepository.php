@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Group;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 use Gedmo\Timestampable\TimestampableListener;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -135,6 +137,16 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $this->createQueryBuilder('u')
             ->orderBy('u.lastLoginAt', 'DESC')
             ->setMaxResults($maxResults)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getAdmins()
+    {
+        return $this->createQueryBuilder('u')
+            ->leftJoin('u.groups', 'g')
+            ->where('g.roles LIKE :role')
+            ->setParameter('role', '%"ROLE_ADMIN"%')
             ->getQuery()
             ->getResult();
     }

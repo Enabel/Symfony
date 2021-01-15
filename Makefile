@@ -125,7 +125,7 @@ schema: ## Build the db, control the schema validity and check the migration sta
 	$(SYMFONY) doctrine:migrations:migrate -q
 
 load-fixtures: schema ## Build the db, control the schema validity, check the migration status and load fixtures
-	$(SYMFONY) hautelook:fixtures:load -n
+	$(SYMFONY) doctrine:fixtures:load -n
 
 ## —— Tests ✅ —————————————————————————————————————————————————————————————————
 phpunit.xml:
@@ -137,9 +137,9 @@ schema-test: ## Build the test db, control the schema validity and check the mig
 	$(SYMFONY) doctrine:migrations:migrate --env=test -q
 
 load-fixtures-test: ## load fixtures
-	$(SYMFONY) hautelook:fixtures:load --env=test -n
+	$(SYMFONY) doctrine:fixtures:load --env=test -n
 
-db-test: schema-test #load-fixtures-test ## Build the test db, control the schema validity, check the migration status and load fixtures
+db-test: schema-test load-fixtures-test ## Build the test db, control the schema validity, check the migration status and load fixtures
 
 test: phpunit.xml db-test ## Launch main functional and unit tests
 	$(EXEC_PHP) ./bin/phpunit --stop-on-failure --coverage-text --coverage-clover=coverage.xml
