@@ -1,6 +1,6 @@
 version: '3'
 services:
-  database:
+  db:
     image: mariadb:10.1.45
     volumes:
       - .docker/data/db:/var/lib/mysql
@@ -11,20 +11,18 @@ services:
       MYSQL_PASSWORD: toor
     ports:
       - 3306:3306
-    labels:
-      com.symfony.server.service-prefix: 'DB'
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
-      PMA_HOSTS: database
+      PMA_HOSTS: db
       PMA_USER: root
       PMA_PASSWORD: toor
       UPLOAD_LIMIT: '20480000'
     ports:
       - 8080:80
     links:
-      - database
+      - db
 
   mailcatcher:
     image: schickling/mailcatcher
