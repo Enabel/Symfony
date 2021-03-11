@@ -13,6 +13,7 @@ COMPOSER      = $(SYMFONY_BIN) composer
 DOCKER        = docker-compose
 DOCKER_EXEC   = docker-compose exec
 YARN          = $(DOCKER_EXEC) yarn yarn
+PHPUNIT       = $(EXEC_PHP) bin/phpunit
 .DEFAULT_GOAL = help
 #.PHONY       = # Not needed for now
 
@@ -71,6 +72,10 @@ create-form: ## Creates a new form class
 create-voter: ## Creates a new security voter class
 	$(SYMFONY) make:voter
 
+get-translation: ## Get translation files from localise
+	$(SYMFONY) translation:download
+	$(SYMFONY) cache:clear
+
 ## —— Symfony binary 💻 ————————————————————————————————————————————————————————
 ./symfony:
 	curl -sS https://get.symfony.com/cli/installer | bash
@@ -98,13 +103,13 @@ down: docker-compose.yaml ## Stop the docker hub
 	$(DOCKER) down --remove-orphans
 
 dpsn: ## List Docker containers for the project
-	docker-compose images
+	$(DOCKER) images
 	@echo "--------------------------------------------------------------------------------------------------------------"
 	docker ps -a | grep "$(PROJECT)_"
 	@echo "--------------------------------------------------------------------------------------------------------------"
 
 ## —— Project 🛠———————————————————————————————————————————————————————————————
-run: up wait serve open ## Start docker and start the web server
+run: ./symfony up wait schema assets serve open ## Start docker and start the web server
 
 reload: load-fixtures ## Reload fixtures
 
@@ -142,17 +147,17 @@ load-fixtures-test: ## load fixtures
 db-test: schema-test load-fixtures-test ## Build the test db, control the schema validity, check the migration status and load fixtures
 
 test: phpunit.xml db-test ## Launch main functional and unit tests
-	$(EXEC_PHP) ./bin/phpunit --stop-on-failure --coverage-text --coverage-clover=coverage.xml
+	$(EXEC_PHP) ./bin/phpunit --stop-on-failure --coverage-text --coverage-clover=coverage.xml --debug
 
 test-external: phpunit.xml db-test ## Launch tests implying external resources (api, services...)
-	$(EXEC_PHP) ./bin/phpunit --group=external --stop-on-failure
+	$(EXEC_PHP) ./bin/phpunit --group=external --stop-on-failure --debug
 
 test-all: phpunit.xml db-test ## Launch all tests
 	$(EXEC_PHP) ./bin/phpunit --stop-on-failure
 
 ## —— Coding standards ✨ ——————————————————————————————————————————————————————
-cs: stan mess codesniffer psalm ## Launch check style and static analysis
-grump: stan mess codesniffer psalm csslint ## Launch checkstyle, static analysis before commit with grumphp
+cs: stan mess codesniffer ## Launch check style and static analysis
+grump: stan mess codesniffer csslint ## Launch checkstyle, static analysis before commit with grumphp
 
 codesniffer: ## Run php_codesniffer only
 	$(EXEC_PHP) ./vendor/bin/phpcs --standard=phpcs.xml -n -p src/
@@ -185,6 +190,9 @@ yarn.lock: package.json
 
 node_modules: yarn.lock ## Install yarn packages
 	@$(YARN)
+
+yarn-update: yarn.lock ## Upgrade yarn packages
+	$(YARN) upgrade
 
 assets: node_modules ## Run Webpack Encore to compile development assets
 	@$(YARN) dev
