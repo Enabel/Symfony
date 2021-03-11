@@ -156,8 +156,8 @@ test-all: phpunit.xml db-test ## Launch all tests
 	$(EXEC_PHP) ./bin/phpunit --stop-on-failure
 
 ## —— Coding standards ✨ ——————————————————————————————————————————————————————
-cs: stan mess codesniffer psalm ## Launch check style and static analysis
-grump: stan mess codesniffer psalm csslint ## Launch checkstyle, static analysis before commit with grumphp
+cs: stan mess codesniffer ## Launch check style and static analysis
+grump: stan mess codesniffer csslint ## Launch checkstyle, static analysis before commit with grumphp
 
 codesniffer: ## Run php_codesniffer only
 	$(EXEC_PHP) ./vendor/bin/phpcs --standard=phpcs.xml -n -p src/

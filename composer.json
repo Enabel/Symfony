@@ -70,7 +70,7 @@
         "escapestudios/symfony2-coding-standard": "^3.11",
         "friendsoftwig/twigcs": "^3.2",
         "phpmd/phpmd": "^2.9",
-        "phpro/grumphp": "^0.19.1",
+        "phpro/grumphp": "^0.22",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^0.12.48",
         "phpstan/phpstan-doctrine": "^0.12.20",
@@ -86,7 +86,7 @@
         "symfony/stopwatch": "^5.2",
         "symfony/var-dumper": "^5.2",
         "symfony/web-profiler-bundle": "^5.2",
-        "vimeo/psalm": "^3.16",
+        "vimeo/psalm": "^4.6",
         "zenstruck/foundry": "^1.6"
     },
     "config": {
